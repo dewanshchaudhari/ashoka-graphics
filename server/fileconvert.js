@@ -1,10 +1,8 @@
 const fs = require('fs');
 const os = require('os');
-const {
-    count
-} = require('console');
 const output = {};
-let counter = 1;
+let arr = [];
+let counter = 0;
 fs.readFile('PrintedArea.Log', 'utf-8', (err, data) => {
     const content = data;
     const lines = content.split(os.EOL);
@@ -22,7 +20,13 @@ fs.readFile('PrintedArea.Log', 'utf-8', (err, data) => {
         counter++;
         // console.log(output);
     });
-    fs.writeFile('output.json', JSON.stringify(output), err => {
+    counter = 0;
+    for (let index = 0; index < 100; index++) {
+        const element = output[index];
+        arr.push(element);
+    }
+    arr = arr.reverse();
+    fs.writeFile('output.json', JSON.stringify(arr), err => {
         if (err) {
             console.log(err);
             return;
